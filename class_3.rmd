@@ -1,0 +1,33 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+census_race = read_csv("census_2010_race.csv")
+head(census_race)
+```
+
+1. What data cleaning/enriching might you need to do
+
+The names need to all be in lowercase. Data types of some columns need to be changed
+to numeric. The pct* columns need to be standardized as well.
+
+2. Is it long or wide data and why
+
+This is wide data since the pct* columns can be consolidated into a race/pct
+column combination.
+
+3. What data transformation might you need to do
+
+We may have to perform a group-by on the names to choose one among duplicates 
+to use as the "main" value for our race identification purposes later. 
+
+```{r}
+
+```
+
