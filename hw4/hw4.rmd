@@ -1,0 +1,27 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+The Mayor and his Cabinet have asked the Citywide Analytics Team to look into the City’s 311 data and determine the following:
+
+1. How long does it take to complete a request city-wide (hence known as close time)? Please provide 3 metrics to answer this question.
+   - Why did you choose the 3 metrics?
+   - What does the 3 metrics say collectively? For example, if one of your metrics is the mean, what might that number miss? What other metrics might you want to pull to supplement what the mean misses.
+2. Assume that the primary goal of your analysis is to ensure that all city departments have as short of a close time as possible. 
+   - What are the 3 departments that the City should focus on? Note the language here. Yes it is vague. It will be up to you to define what “should focus on” is and then conduct your analysis.
+   - What are the 3 departments that have done well so far?
+3. In words, describe 2 confounding factors that can impact the close time of a ticket. You must be able to calculate these confounding factors from the dataset
+4. In words, describe a confounding factor that can impact the close time of a ticket. This factor will come from an outside dataset.
+   - Describe how you might be able to find this dataset.
+   - Describe exactly how you will join this outside dataset to the 311 ticket data
+
+```{r}
+library(tidyverse)
+```
+```{r}
+sr2021 = read_csv("311_service_requests_2021.csv")
+sr2020 = read_csv("311_service_requests_2020.csv")
+```
+
+
