@@ -1758,48 +1758,17 @@ pre code {
 </ol>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh0aWR5dmVyc2UpXG5cbmBgYCJ9 -->
-<pre class="r"><code>library(tidyverse)
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh0aWR5dmVyc2UpXG5gYGAifQ== -->
+<pre class="r"><code>library(tidyverse)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiUmVnaXN0ZXJlZCBTMyBtZXRob2RzIG92ZXJ3cml0dGVuIGJ5ICdkYnBseXInOlxuICBtZXRob2QgICAgICAgICBmcm9tXG4gIHByaW50LnRibF9sYXp5ICAgICBcbiAgcHJpbnQudGJsX3NxbCAgICAgIFxuLS0gQXR0YWNoaW5nIHBhY2thZ2VzIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0gdGlkeXZlcnNlIDEuMy4wIC0tXG52IGdncGxvdDIgMy4zLjMgICAgIHYgcHVycnIgICAwLjMuNFxudiB0aWJibGUgIDMuMS4wICAgICB2IGRwbHlyICAgMS4wLjVcbnYgdGlkeXIgICAxLjEuMyAgICAgdiBzdHJpbmdyIDEuNC4wXG52IHJlYWRyICAgMS40LjAgICAgIHYgZm9yY2F0cyAwLjUuMVxuLS0gQ29uZmxpY3RzIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0gdGlkeXZlcnNlX2NvbmZsaWN0cygpIC0tXG54IGRwbHlyOjpmaWx0ZXIoKSBtYXNrcyBzdGF0czo6ZmlsdGVyKClcbnggZHBseXI6OmxhZygpICAgIG1hc2tzIHN0YXRzOjpsYWcoKVxuIn0= -->
-<pre><code>Registered S3 methods overwritten by &#39;dbplyr&#39;:
-  method         from
-  print.tbl_lazy     
-  print.tbl_sql      
--- Attaching packages ---------------------------------------------------------- tidyverse 1.3.0 --
-v ggplot2 3.3.3     v purrr   0.3.4
-v tibble  3.1.0     v dplyr   1.0.5
-v tidyr   1.1.3     v stringr 1.4.0
-v readr   1.4.0     v forcats 0.5.1
--- Conflicts ------------------------------------------------------------- tidyverse_conflicts() --
-x dplyr::filter() masks stats::filter()
-x dplyr::lag()    masks stats::lag()</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3IyMDIxID0gcmVhZF9jc3YoXCIzMTFfc2VydmljZV9yZXF1ZXN0c18yMDIxLmNzdlwiKVxuYGBgIn0= -->
-<pre class="r"><code>sr2021 = read_csv(&quot;311_service_requests_2021.csv&quot;)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG4tLSBDb2x1bW4gc3BlY2lmaWNhdGlvbiAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tXG5jb2xzKFxuICAuZGVmYXVsdCA9IGNvbF9jaGFyYWN0ZXIoKSxcbiAgY2FzZV9lbnF1aXJ5X2lkID0gY29sX2RvdWJsZSgpLFxuICBvcGVuX2R0ID0gY29sX2RhdGV0aW1lKGZvcm1hdCA9IFwiXCIpLFxuICB0YXJnZXRfZHQgPSBjb2xfZGF0ZXRpbWUoZm9ybWF0ID0gXCJcIiksXG4gIGNsb3NlZF9kdCA9IGNvbF9kYXRldGltZShmb3JtYXQgPSBcIlwiKSxcbiAgZmlyZV9kaXN0cmljdCA9IGNvbF9kb3VibGUoKSxcbiAgY2l0eV9jb3VuY2lsX2Rpc3RyaWN0ID0gY29sX2RvdWJsZSgpLFxuICBuZWlnaGJvcmhvb2Rfc2VydmljZXNfZGlzdHJpY3QgPSBjb2xfZG91YmxlKCksXG4gIGxhdGl0dWRlID0gY29sX2RvdWJsZSgpLFxuICBsb25naXR1ZGUgPSBjb2xfZG91YmxlKClcbilcbmkgVXNlIGBzcGVjKClgIGZvciB0aGUgZnVsbCBjb2x1bW4gc3BlY2lmaWNhdGlvbnMuXG4ifQ== -->
-<pre><code>
--- Column specification -------------------------------------------------------------------------
-cols(
-  .default = col_character(),
-  case_enquiry_id = col_double(),
-  open_dt = col_datetime(format = &quot;&quot;),
-  target_dt = col_datetime(format = &quot;&quot;),
-  closed_dt = col_datetime(format = &quot;&quot;),
-  fire_district = col_double(),
-  city_council_district = col_double(),
-  neighborhood_services_district = col_double(),
-  latitude = col_double(),
-  longitude = col_double()
-)
-i Use `spec()` for the full column specifications.</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3IyMDIwID0gcmVhZF9jc3YoXCIzMTFfc2VydmljZV9yZXF1ZXN0c18yMDIwLmNzdlwiKVxuYGBgIn0= -->
-<pre class="r"><code>sr2020 = read_csv(&quot;311_service_requests_2020.csv&quot;)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5zcjIwMjEgPSByZWFkX2NzdihcIjMxMV9zZXJ2aWNlX3JlcXVlc3RzXzIwMjEuY3N2XCIpXG5cbmBgYCJ9 -->
+<pre class="r"><code>
+sr2021 = read_csv(&quot;311_service_requests_2021.csv&quot;)
+</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiXG4tLSBDb2x1bW4gc3BlY2lmaWNhdGlvbiAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tXG5jb2xzKFxuICAuZGVmYXVsdCA9IGNvbF9jaGFyYWN0ZXIoKSxcbiAgY2FzZV9lbnF1aXJ5X2lkID0gY29sX2RvdWJsZSgpLFxuICBvcGVuX2R0ID0gY29sX2RhdGV0aW1lKGZvcm1hdCA9IFwiXCIpLFxuICB0YXJnZXRfZHQgPSBjb2xfZGF0ZXRpbWUoZm9ybWF0ID0gXCJcIiksXG4gIGNsb3NlZF9kdCA9IGNvbF9kYXRldGltZShmb3JtYXQgPSBcIlwiKSxcbiAgZmlyZV9kaXN0cmljdCA9IGNvbF9kb3VibGUoKSxcbiAgY2l0eV9jb3VuY2lsX2Rpc3RyaWN0ID0gY29sX2RvdWJsZSgpLFxuICBuZWlnaGJvcmhvb2Rfc2VydmljZXNfZGlzdHJpY3QgPSBjb2xfZG91YmxlKCksXG4gIGxhdGl0dWRlID0gY29sX2RvdWJsZSgpLFxuICBsb25naXR1ZGUgPSBjb2xfZG91YmxlKClcbilcbmkgVXNlIGBzcGVjKClgIGZvciB0aGUgZnVsbCBjb2x1bW4gc3BlY2lmaWNhdGlvbnMuXG4ifQ== -->
 <pre><code>
@@ -1822,7 +1791,7 @@ i Use `spec()` for the full column specifications.</code></pre>
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQpUaGUgTWF5b3IgYW5kIGhpcyBDYWJpbmV0IGhhdmUgYXNrZWQgdGhlIENpdHl3aWRlIEFuYWx5dGljcyBUZWFtIHRvIGxvb2sgaW50byB0aGUgQ2l0eeKAmXMgMzExIGRhdGEgYW5kIGRldGVybWluZSB0aGUgZm9sbG93aW5nOg0KDQoxLiBIb3cgbG9uZyBkb2VzIGl0IHRha2UgdG8gY29tcGxldGUgYSByZXF1ZXN0IGNpdHktd2lkZSAoaGVuY2Uga25vd24gYXMgY2xvc2UgdGltZSk/IFBsZWFzZSBwcm92aWRlIDMgbWV0cmljcyB0byBhbnN3ZXIgdGhpcyBxdWVzdGlvbi4NCiAgIC0gV2h5IGRpZCB5b3UgY2hvb3NlIHRoZSAzIG1ldHJpY3M/DQogICAtIFdoYXQgZG9lcyB0aGUgMyBtZXRyaWNzIHNheSBjb2xsZWN0aXZlbHk/IEZvciBleGFtcGxlLCBpZiBvbmUgb2YgeW91ciBtZXRyaWNzIGlzIHRoZSBtZWFuLCB3aGF0IG1pZ2h0IHRoYXQgbnVtYmVyIG1pc3M/IFdoYXQgb3RoZXIgbWV0cmljcyBtaWdodCB5b3Ugd2FudCB0byBwdWxsIHRvIHN1cHBsZW1lbnQgd2hhdCB0aGUgbWVhbiBtaXNzZXMuDQoyLiBBc3N1bWUgdGhhdCB0aGUgcHJpbWFyeSBnb2FsIG9mIHlvdXIgYW5hbHlzaXMgaXMgdG8gZW5zdXJlIHRoYXQgYWxsIGNpdHkgZGVwYXJ0bWVudHMgaGF2ZSBhcyBzaG9ydCBvZiBhIGNsb3NlIHRpbWUgYXMgcG9zc2libGUuIA0KICAgLSBXaGF0IGFyZSB0aGUgMyBkZXBhcnRtZW50cyB0aGF0IHRoZSBDaXR5IHNob3VsZCBmb2N1cyBvbj8gTm90ZSB0aGUgbGFuZ3VhZ2UgaGVyZS4gWWVzIGl0IGlzIHZhZ3VlLiBJdCB3aWxsIGJlIHVwIHRvIHlvdSB0byBkZWZpbmUgd2hhdCDigJxzaG91bGQgZm9jdXMgb27igJ0gaXMgYW5kIHRoZW4gY29uZHVjdCB5b3VyIGFuYWx5c2lzLg0KICAgLSBXaGF0IGFyZSB0aGUgMyBkZXBhcnRtZW50cyB0aGF0IGhhdmUgZG9uZSB3ZWxsIHNvIGZhcj8NCjMuIEluIHdvcmRzLCBkZXNjcmliZSAyIGNvbmZvdW5kaW5nIGZhY3RvcnMgdGhhdCBjYW4gaW1wYWN0IHRoZSBjbG9zZSB0aW1lIG9mIGEgdGlja2V0LiBZb3UgbXVzdCBiZSBhYmxlIHRvIGNhbGN1bGF0ZSB0aGVzZSBjb25mb3VuZGluZyBmYWN0b3JzIGZyb20gdGhlIGRhdGFzZXQNCjQuIEluIHdvcmRzLCBkZXNjcmliZSBhIGNvbmZvdW5kaW5nIGZhY3RvciB0aGF0IGNhbiBpbXBhY3QgdGhlIGNsb3NlIHRpbWUgb2YgYSB0aWNrZXQuIFRoaXMgZmFjdG9yIHdpbGwgY29tZSBmcm9tIGFuIG91dHNpZGUgZGF0YXNldC4NCiAgIC0gRGVzY3JpYmUgaG93IHlvdSBtaWdodCBiZSBhYmxlIHRvIGZpbmQgdGhpcyBkYXRhc2V0Lg0KICAgLSBEZXNjcmliZSBleGFjdGx5IGhvdyB5b3Ugd2lsbCBqb2luIHRoaXMgb3V0c2lkZSBkYXRhc2V0IHRvIHRoZSAzMTEgdGlja2V0IGRhdGENCg0KYGBge3J9DQpsaWJyYXJ5KHRpZHl2ZXJzZSkNCmBgYA0KYGBge3J9DQpzcjIwMjEgPSByZWFkX2NzdigiMzExX3NlcnZpY2VfcmVxdWVzdHNfMjAyMS5jc3YiKQ0Kc3IyMDIwID0gcmVhZF9jc3YoIjMxMV9zZXJ2aWNlX3JlcXVlc3RzXzIwMjAuY3N2IikNCmBgYA0KDQoNCg==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQpUaGUgTWF5b3IgYW5kIGhpcyBDYWJpbmV0IGhhdmUgYXNrZWQgdGhlIENpdHl3aWRlIEFuYWx5dGljcyBUZWFtIHRvIGxvb2sgaW50byB0aGUgQ2l0eeKAmXMgMzExIGRhdGEgYW5kIGRldGVybWluZSB0aGUgZm9sbG93aW5nOg0KDQoxLiBIb3cgbG9uZyBkb2VzIGl0IHRha2UgdG8gY29tcGxldGUgYSByZXF1ZXN0IGNpdHktd2lkZSAoaGVuY2Uga25vd24gYXMgY2xvc2UgdGltZSk/IFBsZWFzZSBwcm92aWRlIDMgbWV0cmljcyB0byBhbnN3ZXIgdGhpcyBxdWVzdGlvbi4NCiAgIC0gV2h5IGRpZCB5b3UgY2hvb3NlIHRoZSAzIG1ldHJpY3M/DQogICAtIFdoYXQgZG9lcyB0aGUgMyBtZXRyaWNzIHNheSBjb2xsZWN0aXZlbHk/IEZvciBleGFtcGxlLCBpZiBvbmUgb2YgeW91ciBtZXRyaWNzIGlzIHRoZSBtZWFuLCB3aGF0IG1pZ2h0IHRoYXQgbnVtYmVyIG1pc3M/IFdoYXQgb3RoZXIgbWV0cmljcyBtaWdodCB5b3Ugd2FudCB0byBwdWxsIHRvIHN1cHBsZW1lbnQgd2hhdCB0aGUgbWVhbiBtaXNzZXMuDQoyLiBBc3N1bWUgdGhhdCB0aGUgcHJpbWFyeSBnb2FsIG9mIHlvdXIgYW5hbHlzaXMgaXMgdG8gZW5zdXJlIHRoYXQgYWxsIGNpdHkgZGVwYXJ0bWVudHMgaGF2ZSBhcyBzaG9ydCBvZiBhIGNsb3NlIHRpbWUgYXMgcG9zc2libGUuIA0KICAgLSBXaGF0IGFyZSB0aGUgMyBkZXBhcnRtZW50cyB0aGF0IHRoZSBDaXR5IHNob3VsZCBmb2N1cyBvbj8gTm90ZSB0aGUgbGFuZ3VhZ2UgaGVyZS4gWWVzIGl0IGlzIHZhZ3VlLiBJdCB3aWxsIGJlIHVwIHRvIHlvdSB0byBkZWZpbmUgd2hhdCDigJxzaG91bGQgZm9jdXMgb27igJ0gaXMgYW5kIHRoZW4gY29uZHVjdCB5b3VyIGFuYWx5c2lzLg0KICAgLSBXaGF0IGFyZSB0aGUgMyBkZXBhcnRtZW50cyB0aGF0IGhhdmUgZG9uZSB3ZWxsIHNvIGZhcj8NCjMuIEluIHdvcmRzLCBkZXNjcmliZSAyIGNvbmZvdW5kaW5nIGZhY3RvcnMgdGhhdCBjYW4gaW1wYWN0IHRoZSBjbG9zZSB0aW1lIG9mIGEgdGlja2V0LiBZb3UgbXVzdCBiZSBhYmxlIHRvIGNhbGN1bGF0ZSB0aGVzZSBjb25mb3VuZGluZyBmYWN0b3JzIGZyb20gdGhlIGRhdGFzZXQNCjQuIEluIHdvcmRzLCBkZXNjcmliZSBhIGNvbmZvdW5kaW5nIGZhY3RvciB0aGF0IGNhbiBpbXBhY3QgdGhlIGNsb3NlIHRpbWUgb2YgYSB0aWNrZXQuIFRoaXMgZmFjdG9yIHdpbGwgY29tZSBmcm9tIGFuIG91dHNpZGUgZGF0YXNldC4NCiAgIC0gRGVzY3JpYmUgaG93IHlvdSBtaWdodCBiZSBhYmxlIHRvIGZpbmQgdGhpcyBkYXRhc2V0Lg0KICAgLSBEZXNjcmliZSBleGFjdGx5IGhvdyB5b3Ugd2lsbCBqb2luIHRoaXMgb3V0c2lkZSBkYXRhc2V0IHRvIHRoZSAzMTEgdGlja2V0IGRhdGENCg0KYGBge3J9DQpsaWJyYXJ5KHRpZHl2ZXJzZSkNCmBgYA0KDQpgYGB7cn0NCiMgMjAyMA0KZG93bmxvYWQuZmlsZSh1cmwgPSAiaHR0cHM6Ly9kYXRhLmJvc3Rvbi5nb3YvZGF0YXNldC84MDQ4Njk3Yi1hZDY0LTRiZmMtYjA5MC1lZTAwMTY5ZjIzMjMvcmVzb3VyY2UvNmZmNmE2ZmQtMzE0MS00NDQwLWE4ODAtNmY2MGEzN2ZlNzg5L2Rvd25sb2FkL3NjcmlwdF8xMDU3NzQ2NzJfMjAyMTAxMDgxNTM0MDBfY29tYmluZS5jc3YiLCBkZXN0ZmlsZSA9ICIzMTFfc2VydmljZV9yZXF1ZXN0c18yMDIwLmNzdiIsIG1vZGUgPSAidyIpDQoNCkdFVCgnaHR0cHM6Ly9kYXRhLmJvc3Rvbi5nb3YvYXBpLzMvYWN0aW9uL2RhdGFzdG9yZV9zZWFyY2g/cmVzb3VyY2VfaWQ9NmZmNmE2ZmQtMzE0MS00NDQwLWE4ODAtNmY2MGEzN2ZlNzg5Jywgd3JpdGVfZGlzaygiMzExX3NlcnZpY2VfcmVxdWVzdHNfMjAyMC5jc3YiLCBvdmVyd3JpdGU9VFJVRSkpDQoNCiMgMjAyMQ0KZG93bmxvYWQuZmlsZSh1cmwgPSAiaHR0cHM6Ly9kYXRhLmJvc3Rvbi5nb3YvZGF0YXNldC84MDQ4Njk3Yi1hZDY0LTRiZmMtYjA5MC1lZTAwMTY5ZjIzMjMvcmVzb3VyY2UvZjUzZWJjY2QtYmM2MS00OWY5LTgzZGItNjI1ZjIwOWM5NWY1L2Rvd25sb2FkL3RtcHl3anU2YWkyLmNzdiIsIGRlc3RmaWxlID0gIjMxMV9zZXJ2aWNlX3JlcXVlc3RzXzIwMjEuY3N2IiwgbW9kZSA9ICJ3IikNCg0KR0VUKCdodHRwczovL2RhdGEuYm9zdG9uLmdvdi9hcGkvMy9hY3Rpb24vZGF0YXN0b3JlX3NlYXJjaD9yZXNvdXJjZV9pZD1mNTNlYmNjZC1iYzYxLTQ5ZjktODNkYi02MjVmMjA5Yzk1ZjUnLCB3cml0ZV9kaXNrKCIzMTFfc2VydmljZV9yZXF1ZXN0c18yMDIxLmNzdiIsIG92ZXJ3cml0ZT1UUlVFKSkNCg0Kc3IyMDIwID0gcmVhZF9jc3YoIjMxMV9zZXJ2aWNlX3JlcXVlc3RzXzIwMjAuY3N2IikNCnNyMjAyMSA9IHJlYWRfY3N2KCIzMTFfc2VydmljZV9yZXF1ZXN0c18yMDIxLmNzdiIpDQpgYGANCg0KDQo=</div>
 
 
 

@@ -19,9 +19,20 @@ The Mayor and his Cabinet have asked the Citywide Analytics Team to look into th
 ```{r}
 library(tidyverse)
 ```
+
 ```{r}
-sr2021 = read_csv("311_service_requests_2021.csv")
+# 2020
+download.file(url = "https://data.boston.gov/dataset/8048697b-ad64-4bfc-b090-ee00169f2323/resource/6ff6a6fd-3141-4440-a880-6f60a37fe789/download/script_105774672_20210108153400_combine.csv", destfile = "311_service_requests_2020.csv", mode = "w")
+
+GET('https://data.boston.gov/api/3/action/datastore_search?resource_id=6ff6a6fd-3141-4440-a880-6f60a37fe789', write_disk("311_service_requests_2020.csv", overwrite=TRUE))
+
+# 2021
+download.file(url = "https://data.boston.gov/dataset/8048697b-ad64-4bfc-b090-ee00169f2323/resource/f53ebccd-bc61-49f9-83db-625f209c95f5/download/tmpywju6ai2.csv", destfile = "311_service_requests_2021.csv", mode = "w")
+
+GET('https://data.boston.gov/api/3/action/datastore_search?resource_id=f53ebccd-bc61-49f9-83db-625f209c95f5', write_disk("311_service_requests_2021.csv", overwrite=TRUE))
+
 sr2020 = read_csv("311_service_requests_2020.csv")
+sr2021 = read_csv("311_service_requests_2021.csv")
 ```
 
 
