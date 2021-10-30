@@ -1,0 +1,61 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+library(lubridate)
+```
+
+25 Slides
+
+We would like your help to better understand factors that affect Job Slots product retention. Please use the data provided in Exhibit 1 and 2 to answer the following questions.																								
+																								
+We anticipate that it will take ~2-5 hours. You can analyze the data using whatever tools you feel will help you best extract insights.																								
+Please present your responses to each question in a single PowerPoint deck (or PDF). In your write-up, include your assumptions and provide explanations for your answers. 																								
+Additionally, please feel free to include any supporting materials you produced while addressing these question (scripts, model outputs, visualizations etc.). 																								
+																								
+PART A: Data wrangling in R (for reference, the orignial assignment for Part A asked for SQL. You are required to use R)	
+
+```{r}
+# we care about renewed_flag
+perf = read_csv("PA446 Midterm Case Oct 27 - Ex 1 - slot_performance Table.csv")
+locs = read_csv("PA446 Midterm Case Oct 27 - Ex 2 - location Table.csv")
+```
+
+1)	Total Contract Value is defined as the total amount that customers committed to spend. Write R tidyverse pipe that returns the Total Contract Value ('total_contract_value' field) for each state (name) by month (using 'start_date') in the provided datasets.	
+
+```{r}
+joined = perf %>% 
+  left_join(locs, on=city_id) %>%
+  mutate(start_date = mdy(start_date),
+         start_month = month(start_date))
+
+joined %>%
+  group_by(state_name, start_month) %>%
+  summarise(sum(total_contract_value))
+```
+
+
+```{r}
+joined %>%
+  group_by(state_name, month) %>%
+  summarise
+```
+																								
+2)	For all employers who purchased >1 product with [REDACTED], write a R tidyverse pipe to return the 'job_slots' and 'click_marketplace_value' values for the second transaction by employer.																							
+																								
+*Note: You only have to provide the R code needed to accomplish the questions above; output results are not required																								
+																								
+PART B: Metric Design																								
+3)	What metrics would you propose to measure the quality of services [REDACTED] provided to our clients? How does performance vary in terms of:																							
+	- job_slots?																							
+	- total_contract_value?																							
+	- click_marketplace_value?																							
+																								
+PART C: Retention Modeling and Analysis																								
+4)	Which factors or combination of factors best correlate with an employer's likelihood to retain (i.e. renewed_flag = 1)? And how well does your chosen method correlate with retention? Please list any assumptions you made and explain why you chose your methodology.																							
+																								
+5)	Based on your analysis, what modifications would you recommend we make to our ad platform algorithm to improve retention?
+
