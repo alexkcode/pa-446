@@ -1,14 +1,16 @@
 ---
-title: "R Notebook"
-output: html_notebook
+title: 'Analytics Exercise:  Predicting Job Slot Product Retention'
+author: "Alexis Kwan"
+subtitle: PA 446 Midterm
+output:
+  pdf_document: default
+  html_notebook: default
 ---
 
-```{r}
+```{r eval = TRUE, echo = FALSE, warning = FALSE, message = FALSE}
 library(tidyverse)
 library(lubridate)
 ```
-
-25 Slides
 
 We would like your help to better understand factors that affect Job Slots product retention. Please use the data provided in Exhibit 1 and 2 to answer the following questions.																								
 																								
@@ -18,44 +20,80 @@ Additionally, please feel free to include any supporting materials you produced 
 																								
 PART A: Data wrangling in R (for reference, the orignial assignment for Part A asked for SQL. You are required to use R)	
 
-```{r}
-# we care about renewed_flag
+```{r eval = TRUE, echo = FALSE, warning = FALSE, message = FALSE}
 perf = read_csv("PA446 Midterm Case Oct 27 - Ex 1 - slot_performance Table.csv")
 locs = read_csv("PA446 Midterm Case Oct 27 - Ex 2 - location Table.csv")
 ```
 
 1)	Total Contract Value is defined as the total amount that customers committed to spend. Write R tidyverse pipe that returns the Total Contract Value ('total_contract_value' field) for each state (name) by month (using 'start_date') in the provided datasets.	
 
-```{r}
+```{r message = FALSE}
 joined = perf %>% 
   left_join(locs, on=city_id) %>%
   mutate(start_date = mdy(start_date),
          start_month = month(start_date))
+```
 
+
+```{r message = FALSE}
 joined %>%
   group_by(state_name, start_month) %>%
   summarise(sum(total_contract_value))
 ```
-
-
-```{r}
-joined %>%
-  group_by(state_name, month) %>%
-  summarise
-```
 																								
 2)	For all employers who purchased >1 product with [REDACTED], write a R tidyverse pipe to return the 'job_slots' and 'click_marketplace_value' values for the second transaction by employer.																							
 																								
-*Note: You only have to provide the R code needed to accomplish the questions above; output results are not required																								
-																								
+*Note: You only have to provide the R code needed to accomplish the questions above; output results are not required
+
+```{r message = FALSE}
+joined %>% 
+  arrange(employer_id, start_date) %>%
+  group_by(employer_id) %>%
+  mutate(trans_n = row_number(employer_id)) %>%
+  arrange(employer_id) %>%
+  filter(trans_n == 2)
+```
+
+
 PART B: Metric Design																								
 3)	What metrics would you propose to measure the quality of services [REDACTED] provided to our clients? How does performance vary in terms of:																							
 	- job_slots?																							
 	- total_contract_value?																							
-	- click_marketplace_value?																							
-																								
+	- click_marketplace_value?
+	
+Quality of service ought relate directly in some way to the deliverable or outcome that client cares about. In this case they care about the number of applications they get vs. the cost-per-application. It would be hard to directly influence number of applications that actually get through (due to external factors) we can at least influence traffic and clicks to some degree. Therefore we should look to a function of apply_start_clicks for our measure of quality.
+
+```{r}
+perf %>% summarise(median(apply_start_clicks/job_slots, na.rm = T))
+```
+
+Based on the table above we can see that the client gets about 2 application start clicks for every job slot in a contract.
+
+```{r}
+perf %>% summarise(median(apply_start_clicks/total_contract_value, na.rm = T))
+```
+
+For total contract value, they get about median value of 0.04 clicks for every dollar spent on a contract.
+
+```{r}
+perf %>% summarise(median(apply_start_clicks/click_marketplace_value, na.rm = T))
+```
+
+In terms of the marketplace value, clients receive about 0.03 clicks per dollar of marketplace value.
+
 PART C: Retention Modeling and Analysis																								
-4)	Which factors or combination of factors best correlate with an employer's likelihood to retain (i.e. renewed_flag = 1)? And how well does your chosen method correlate with retention? Please list any assumptions you made and explain why you chose your methodology.																							
-																								
+4)	Which factors or combination of factors best correlate with an employer's likelihood to retain (i.e. renewed_flag = 1)? And how well does your chosen method correlate with retention? Please list any assumptions you made and explain why you chose your methodology.
+
+```{r}
+joined = joined %>%
+  mutate(market_diff = click_marketplace_value - total_contract_value)
+
+glm1 = glm(renewed_flag ~ market_diff + apply_start_clicks, data = joined, family = binomial)
+summary(glm1)
+```
+
+Market_diff represents how much value over or under the market rate that we are delivered to the client relative to the competition. apply_start_clicks shows how much value we deliver at the beginning of the application process. These are factors that directly relate to our quality of service and are levers related to different aspects of an application journey. I hypothesize that these two factors affect how likely a client is to renew a contract, and using logistic regression we can predict if they will renew or not.
+
 5)	Based on your analysis, what modifications would you recommend we make to our ad platform algorithm to improve retention?
 
+Both of the factors decribed above appear to have a statistically significant relationship to the renewal status. Since the market differential has a positive affect on how likely a client is to renew, we ought to change the bidding algorithm to allow for a larger differential between the click market value versus the contract value. This could mean boosting market value for underperforming applications multiple times higher than before. Additionally since start clicks negatively affect the probability we should modify the search algorithm to direct fewer applicants to applications, perhaps focusing on applicants who have a higher probablity to finish an application, like those with higher relevance to the job, versus a larger pool of applicants. 
