@@ -5,4 +5,4 @@ predict_sept29.csv
 salaries_sept29.csv
 
 */*.RData
-*/*.RHistory
+*/*.Rhistory
