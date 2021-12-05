@@ -131,6 +131,7 @@ housing_index = hud_2021 %>%
     # this represents one row
     current <- tibble(...)
     
+    # retrieves geoids from HUD API
     resp = raw_zips_to_tract(current$ZIP)
     print(paste("zip:", current$ZIP))
     print(is_null(resp[[1]]$error))
@@ -164,3 +165,7 @@ housing_index = hud_2021 %>%
 
 housing_index = housing_index %>% 
   left_join(raw_loc_index, by=c('geoid'='GEOID'))
+
+sum(is.na(housing_index$OBJECTID))/length(housing_index$OBJECTID)
+
+# TO DO: build the dashboard first
