@@ -6,3 +6,5 @@ salaries_sept29.csv
 
 */*.RData
 */*.Rhistory
+
+.~*
