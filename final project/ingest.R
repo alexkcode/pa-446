@@ -16,6 +16,7 @@ library(jsonlite)
 library(tidyverse)
 library(broom)
 library(purrr)
+library(furrr)
 
 # HUD Users Location Affordability Index v.3 data
 # data that shows the links between housing and transportation
@@ -23,6 +24,8 @@ resp = GET("https://services.arcgis.com/VTyQ9soqVukalItT/arcgis/rest/services/Lo
 jsonRespParsed = content(resp, as="parsed") 
 
 raw_loc_index = map_dfr(jsonRespParsed$features, "attributes")
+
+raw_loc_index %>% write_csv("loc_index.csv")
 
 # HUD Users/USPS Crosswalk data
 # data that maps zip codes to census tracts and counties
@@ -123,7 +126,7 @@ hud_2021 = readxl::read_xlsx("fy2021_safmrs_revised.xlsx") %>%
          "br_4" = `SAFMR\n4BR`) %>%
   mutate(year = 2021, .before = "ZIP")
 
-map_dfr(raw_zips_to_tract(60002)$data$results, ~ .x)
+map_dfr(raw_zips_to_tract(60006)$data$results, ~ .x)
 
 # head(hud_2021, 2) %>%
 housing_index = hud_2021 %>%
@@ -144,6 +147,45 @@ housing_index = hud_2021 %>%
       # print(paste("geoid:", zips$geoid))
       zips = zips %>% mutate(cnty_fips = substr(geoid, start = 0, stop = 5),
                              tract = substr(geoid, start = 5, stop = 10),
+                             ZIP = current$ZIP)
+      # print(zips)
+      return(current %>% inner_join(zips, by = "ZIP"))
+    } else {
+      print("Response is empty!")
+      current %>% inner_join(
+        data.frame(
+          ZIP = NULL,
+          res_ratio = NULL,
+          bus_ratio = NULL,
+          oth_ratio = NULL,
+          tot_ratio = NULL
+        ) %>%
+          mutate(ZIP = current$ZIP),
+        by = "ZIP"
+      )
+    }
+  })
+
+library(zipcodeR)
+
+# head(hud_2021, 2) %>%
+housing_index = hud_2021 %>%
+  future_pmap_dfr(function(...) {
+    # this represents one row
+    current <- tibble(...)
+    
+    # retrieves geoids from HUD API
+    resp = get_tracts(current$ZIP)
+    print(paste("zip:", current$ZIP))
+    print(is_null(resp))
+    
+    if (!is_null(resp)) {
+      zips = resp
+      # print(paste("county + tract:", current$CNTY_FIPS, current$TRACT))
+      # print(zips$geoid)
+      # zips = zips %>% mutate(zip_code = geoid)
+      # print(paste("geoid:", zips$geoid))
+      zips = zips %>% mutate(CNTY_FIPS = substr(GEOID, start = 0, stop = 5),
                              ZIP = current$ZIP)
       # print(zips)
       return(current %>% inner_join(zips, by = "ZIP"))
