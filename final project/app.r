@@ -15,39 +15,65 @@ library(plotly)
 loc_index = read_csv("loc_index.csv")
 
 ui = dashboardPage(
+  dashboardHeader(title = "Renter Livability"),
   dashboardSidebar(
-    selectizeInput(
-      'food_id', '1. Ingredient', choices = ca_food_choices,
-      options = list(
-        placeholder = 'Type to search for ingredient',
-        onInitialize = I('function() { this.setValue(""); }')
+    textInput(inputId = "text_input", label = "County FIPS")
+  ),
+  dashboardBody(
+    fluidRow(
+      valueBoxOutput("commute")
+    ),
+    fluidRow(
+      box(
+        width = 4, status = "info", solidHeader = TRUE,
+        title = "Area Rent vs City Rent",
+        plotOutput("ggp")
+      ),
+      box(
+        
       )
     ),
-    conditionalPanel('input.food_id != ""', 
-                     selectizeInput('measure_unit', '2. Measure Unit', choices = c("Select an ingredient" = "")),
-                     numericInput('quantity', '3. Quantity', value = 1, min = 0, step = 1)),
-    actionButton("add", "Add ingredient"),
-    actionButton("remove", "Remove ingredient"),
-    numericInput("serving", "Number of servings contained", min = 0.01, step = 1, value = 1),
-    tags$p("Note: All nutrient information is based on the Canadian Nutrient File. Nutrient amounts do not account for variation in nutrient retention and yield losses of ingredients during preparation. % daily values (DV) are taken from the Table of Daily Values from the Government of Canada. This data should not be used for nutritional labeling.")
-  ),
+    fluidRow(
+      column(8, tableOutput(outputId = "table")),
+    )
+  )
 )
 
 server = function(input, output, session) {
-  # make reactive to store ingredients
-  ing_df <- shiny::reactiveValues()
-  ing_df$df <- data.frame("quantity" = numeric(), 
-                          "units" = character(), 
-                          "ingredient_name" = character(), 
-                          "FoodID" = numeric(), 
-                          stringsAsFactors = F)
-  ing_df$measure <- data.frame("numeric" = numeric(),
-                               "units" = character(),
-                               "description" = character(),
-                               "ConversionFactorValue" = numeric(),
-                               "MeasureID" = numeric(),
-                               "FoodID" = numeric(),
-                               stringsAsFactors = F)
+  output$commute <- renderValueBox({
+    df_filter <- loc_index %>%
+      filter(CNTY_FIPS==input$text_input)
+    
+    commuteDistance <- median(df_filter$median_commute, na.rm = T)
+    
+    cityMedian <- median(loc_index$median_commute, na.rm = T) 
+      
+    valueBox(
+      value = formatC(commuteDistance, digits = 3, format = "f"),
+      subtitle = "Median Commute Distance",
+      icon = icon("clock-o", lib = "font-awesome"),
+      color = if (commuteDistance > cityMedian) "yellow" else "aqua"
+    )
+  })
+  
+  output$table <- renderTable({
+    df_filter <- loc_index %>%
+      filter(CNTY_FIPS==input$text_input)
+    head(df_filter)
+  })
+  
+  output$ggp <- renderPlot({
+    loc_index %>%
+      group_by(CNTY_FIPS) %>%
+      mutate(area = median_gross_rent,
+             city = median(median_gross_rent, na.rm = T)) %>%
+      pivot_longer(cols=c(area, city), names_to = "area", values_to = "rent") %>%
+      filter(CNTY_FIPS==input$text_input) %>%
+      ggplot(aes(x = area, y = rent)) + 
+        geom_col() +
+        xlab("") +
+        ylab("Rent")
+  })
 }
 
 # Run the application 
